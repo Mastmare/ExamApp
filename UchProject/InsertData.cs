@@ -49,10 +49,9 @@ namespace UchProject
             Teacher currentTeacher = Program.SearchTeacherByName(FindTeacherName);
             InsertData generalForm = new InsertData();
             string[] SendData = new string[7];
-            SendData = comboBoxTimeAndTypeOfLesson.Text.Split(':');
-            comboBoxGroup.Text = SendData[0];
-            comboBoxDiscipline.Text = SendData[1];
-            comboBoxDayofWeek.Text = Convert.ToString(SendData.Length);
+            string[] send = comboBoxTimeAndTypeOfLesson.Text.Split(':');
+            SendData[0] = send[0];
+            SendData[1] = send[1];
         }
 
     }
