@@ -21,9 +21,9 @@ namespace UchProject
             return TeacherName;
         }
 
-        public void AddRec(string[] test)
+        public void AddRec(string[] insert)
         {
-   
+            TeachersWeek.AddRecordInTable(insert);
         }
 
         public void SetTeacherName(string newName)

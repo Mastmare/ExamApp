@@ -52,6 +52,12 @@ namespace UchProject
             string[] send = comboBoxTimeAndTypeOfLesson.Text.Split(':');
             SendData[0] = send[0];
             SendData[1] = send[1];
+            SendData[2] = comboBoxDayofWeek.Text;
+            SendData[3] = comboBoxTypeOfWeek.Text;
+            SendData[4] = comboBoxGroup.Text;
+            SendData[5] = comboBoxDiscipline.Text;
+            SendData[6] = comboBoxAuditory.Text;
+
         }
 
     }
