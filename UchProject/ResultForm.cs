@@ -21,7 +21,7 @@ namespace UchProject
             string[] insertString = Program.GetDataString();
             foreach (string currentText in insertString)
             {
-                textBoxResult.Text += currentText;
+                textBoxResult.AppendText(currentText + Environment.NewLine);
             }
         }
     }

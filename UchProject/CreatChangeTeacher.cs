@@ -19,25 +19,27 @@ namespace UchProject
         private void buttonAddNewTeacher_Click(object sender, EventArgs e)
         {
             string TeacherName = comboBoxAddChangeTeacher.Text;
-            Program.TeachersArray[Program.TeachersArray.Length - 1] = new Teacher(TeacherName);
+            Program.AddNewTeacher(TeacherName);
             this.Close();
         }
 
         private void CreatChangeTeacher_Load(object sender, EventArgs e)
         {
-
+            comboBoxAddChangeTeacher.Items.Clear();
         }
 
         private void buttonChangeTeacher_Click(object sender, EventArgs e)
         {
             Teacher changeTeacher = Program.SearchTeacherByName(comboBoxAddChangeTeacher.Text);
             changeTeacher.SetTeacherName(textBoxNewName.Text);
+            InsertData form = new InsertData();
+            form.Delete(textBoxNewName.Text);
             this.Close();
         }
 
         private void comboBoxAddChangeTeacher_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxAddChangeTeacher.ResetText();
+
             for (int i = 0; i < Program.TeachersArray.Length; i++)
             {
                 if (Program.TeachersArray[i] != null)

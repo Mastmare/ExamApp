@@ -55,7 +55,7 @@ namespace UchProject
             {
                 for (int i = 0; i <= WeekTable.Length - 2; i++)
                 {
-                    for (int j = 1; j <= WeekTable.Length - 1; j++)
+                    for (int j = i+1; j <= WeekTable.Length - 1; j++)
                     {
                         if (compareTime(ConvertTime(WeekTable[i]["Начало занятия"]),
                             ConvertTime(WeekTable[i]["Конец занятия"]),
@@ -67,8 +67,12 @@ namespace UchProject
                             flag = true;
                             StringBuilder resultMessage = new StringBuilder();
                             resultMessage.AppendFormat("*Есть пересечение во времени у преподавателя {0}:" +
-                                                       "\nЗанятие по {1} {2}-{3},каб{4}\n" +
-                                                       "и занятие по {5} {6}-{7},каб{8}\n----\n", teacherName,
+                                                       Environment.NewLine +
+                                                       "Занятие по {1} {2}-{3}, каб{4}" +
+                                                       Environment.NewLine +
+                                                       "Занятие по {5} {6}-{7}, каб{8}" +
+                                                       Environment.NewLine + "----" +
+                                                       Environment.NewLine, teacherName,
                                 WeekTable[i]["Наименование дисциплины"],
                                 WeekTable[i]["Начало занятия"],
                                 WeekTable[i]["Конец занятия"],
@@ -82,7 +86,8 @@ namespace UchProject
                     }
                 }
             }
-            if (!flag) Program.AddResultToArray("*Пересечений не обнаружено\n----");
+            if (!flag) Program.AddResultToArray("*Пересечений не обнаружено"+
+                Environment.NewLine+ "----" + Environment.NewLine);
         }
 
     }

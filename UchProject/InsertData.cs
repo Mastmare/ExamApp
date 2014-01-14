@@ -12,9 +12,19 @@ namespace UchProject
 {
     public partial class InsertData : Form
     {
+        private string DeleteTeacher = null;
+
+
         public InsertData()
         {
             InitializeComponent();
+        }
+
+        public void Delete(string name)
+        {
+            Teacher currenTeacher = Program.SearchTeacherByName(name);
+            currenTeacher.SetTeacherName(name);
+            comboBoxTeacher.Items.Remove(name);
         }
 
         private void buttonAddChangeTeacher_Click(object sender, EventArgs e)
@@ -26,11 +36,11 @@ namespace UchProject
 
         private void InsertData_Load(object sender, EventArgs e)
         {
+            comboBoxTeacher.Items.Clear();
         }
 
         private void comboBoxTeacher_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxTeacher.Items.Clear();
             for (int i = 0; i < Program.TeachersArray.Length; i++)
             {
                 if (Program.TeachersArray[i] != null)

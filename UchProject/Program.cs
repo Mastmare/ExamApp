@@ -22,6 +22,10 @@ namespace UchProject
 
         public static void AddNewTeacher(string NewTeacherName)
         {
+            if (TeachersArray[0] != null)
+            {
+                Array.Resize(ref TeachersArray, TeachersArray.Length + 1);
+            }
             TeachersArray[TeachersArray.Length-1] = new Teacher(NewTeacherName);
         }
 
@@ -47,10 +51,6 @@ namespace UchProject
 
         public static void checkByAuditory()
         {
-            int i = 0;
-            while (i<TeachersArray.Length-1)
-            {
-            }
         }
     }
 }
