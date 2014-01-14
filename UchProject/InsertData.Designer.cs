@@ -51,8 +51,8 @@
             // 
             this.comboBoxTimeAndTypeOfLesson.FormattingEnabled = true;
             this.comboBoxTimeAndTypeOfLesson.Items.AddRange(new object[] {
-            "ПР: 9.00 - 10.30",
-            "ПР: 10.45 - 12.15"});
+            "ПР:9.00-10.30",
+            "ПР:10.45-12.15"});
             this.comboBoxTimeAndTypeOfLesson.Location = new System.Drawing.Point(217, 9);
             this.comboBoxTimeAndTypeOfLesson.Name = "comboBoxTimeAndTypeOfLesson";
             this.comboBoxTimeAndTypeOfLesson.Size = new System.Drawing.Size(153, 21);
@@ -191,6 +191,7 @@
             this.buttonAnalyseCollision.TabIndex = 3;
             this.buttonAnalyseCollision.Text = "Проверить пересечения";
             this.buttonAnalyseCollision.UseVisualStyleBackColor = true;
+            this.buttonAnalyseCollision.Click += new System.EventHandler(this.buttonAnalyseCollision_Click);
             // 
             // buttonAddRecord
             // 

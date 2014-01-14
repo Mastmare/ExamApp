@@ -43,6 +43,8 @@
             this.comboBoxAddChangeTeacher.Name = "comboBoxAddChangeTeacher";
             this.comboBoxAddChangeTeacher.Size = new System.Drawing.Size(237, 21);
             this.comboBoxAddChangeTeacher.TabIndex = 0;
+            this.comboBoxAddChangeTeacher.SelectedIndexChanged += new System.EventHandler(this.comboBoxAddChangeTeacher_SelectedIndexChanged);
+            this.comboBoxAddChangeTeacher.Click += new System.EventHandler(this.comboBoxAddChangeTeacher_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -87,6 +89,7 @@
             this.buttonChangeTeacher.TabIndex = 3;
             this.buttonChangeTeacher.Text = "Изменить ФИО";
             this.buttonChangeTeacher.UseVisualStyleBackColor = true;
+            this.buttonChangeTeacher.Click += new System.EventHandler(this.buttonChangeTeacher_Click);
             // 
             // CreatChangeTeacher
             // 

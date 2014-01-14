@@ -8,6 +8,7 @@ namespace UchProject
     static class Program
     {
         public static Teacher[] TeachersArray = new Teacher[1];
+        private static string[] ResultArray = new string[0];
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -31,6 +32,25 @@ namespace UchProject
                 if (nowTeacher.Name() == searchebleName) return nowTeacher;
             }   
             return null;
-        } 
+        }
+
+        public static void AddResultToArray(string s)
+        {
+            Array.Resize(ref ResultArray, ResultArray.Length+1);
+            ResultArray[ResultArray.Length - 1] = s;
+        }
+
+        public static string[] GetDataString()
+        {
+            return ResultArray;
+        }
+
+        public static void checkByAuditory()
+        {
+            int i = 0;
+            while (i<TeachersArray.Length-1)
+            {
+            }
+        }
     }
 }

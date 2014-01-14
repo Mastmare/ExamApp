@@ -9,11 +9,16 @@ namespace UchProject
     class Teacher
     {
         private string TeacherName;
-        Week  TeachersWeek = new Week(); 
+        Week TeachersWeek = new Week();
 
         public Teacher(string TeacherName)
         {
             this.TeacherName = TeacherName;
+        }
+
+        public void CheckByTeacher()
+        {
+            TeachersWeek.CheckByTeahcer(TeacherName);
         }
 
         public string Name()

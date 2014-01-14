@@ -30,16 +30,20 @@ namespace UchProject
 
         private void comboBoxTeacher_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboBoxTeacher.Items.Clear();
             for (int i = 0; i < Program.TeachersArray.Length; i++)
             {
-                string NowName = Program.TeachersArray[i].Name();
-                bool flag = false;
-                for (int j = 0; j < comboBoxTeacher.Items.Count; j++)
+                if (Program.TeachersArray[i] != null)
                 {
-                    if (Convert.ToString(comboBoxTeacher.Items[j]) == NowName)
-                        flag = true;
+                    string NowName = Program.TeachersArray[i].Name();
+                    bool flag = false;
+                    for (int j = 0; j < comboBoxTeacher.Items.Count; j++)
+                    {
+                        if (Convert.ToString(comboBoxTeacher.Items[j]) == NowName)
+                            flag = true;
+                    }
+                    if (!flag) comboBoxTeacher.Items.Add(NowName);
                 }
-                if (!flag) comboBoxTeacher.Items.Add(NowName);
             }
         }
 
@@ -57,7 +61,20 @@ namespace UchProject
             SendData[4] = comboBoxGroup.Text;
             SendData[5] = comboBoxDiscipline.Text;
             SendData[6] = comboBoxAuditory.Text;
+            currentTeacher.AddRec(SendData);
 
+        }
+
+        private void buttonAnalyseCollision_Click(object sender, EventArgs e)
+        {
+            string s = "Проверка на пересечения связанные с занятостью преподавателя:";
+            Program.AddResultToArray(s);
+            foreach (Teacher currentTeacher in Program.TeachersArray)
+            {
+                currentTeacher.CheckByTeacher();
+            }
+            ResultForm newForm = new ResultForm();
+            newForm.Show();
         }
 
     }

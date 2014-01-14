@@ -27,5 +27,31 @@ namespace UchProject
         {
 
         }
+
+        private void buttonChangeTeacher_Click(object sender, EventArgs e)
+        {
+            Teacher changeTeacher = Program.SearchTeacherByName(comboBoxAddChangeTeacher.Text);
+            changeTeacher.SetTeacherName(textBoxNewName.Text);
+            this.Close();
+        }
+
+        private void comboBoxAddChangeTeacher_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxAddChangeTeacher.ResetText();
+            for (int i = 0; i < Program.TeachersArray.Length; i++)
+            {
+                if (Program.TeachersArray[i] != null)
+                {
+                    string NowName = Program.TeachersArray[i].Name();
+                    bool flag = false;
+                    for (int j = 0; j < comboBoxAddChangeTeacher.Items.Count; j++)
+                    {
+                        if (Convert.ToString(comboBoxAddChangeTeacher.Items[j]) == NowName)
+                            flag = true;
+                    }
+                    if (!flag) comboBoxAddChangeTeacher.Items.Add(NowName);
+                }
+            }
+        }
     }
 }
