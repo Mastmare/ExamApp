@@ -33,9 +33,21 @@ namespace UchProject
         {
             foreach (Teacher nowTeacher in TeachersArray)
             {
-                if (nowTeacher.Name() == searchebleName) return nowTeacher;
+                if (nowTeacher.TeacherName == searchebleName) return nowTeacher;
             }   
             return null;
+        }
+
+        public static int NextTeacherIndexByName(string currentName)
+        {
+            for (int i = 0; i < TeachersArray.Length; i++)
+            {
+                if (TeachersArray[i].TeacherName == currentName && i + 1 < TeachersArray.Length)
+                {
+                    return i + 1;
+                }
+            }
+            return TeachersArray.Length;
         }
 
         public static void AddResultToArray(string s)
@@ -49,8 +61,12 @@ namespace UchProject
             return ResultArray;
         }
 
-        public static void checkByAuditory()
+        public static void TotalCheck()
         {
+            foreach (Teacher firstTeacher in TeachersArray )
+            {
+                
+            }
         }
     }
 }

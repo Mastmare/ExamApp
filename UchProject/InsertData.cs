@@ -23,7 +23,7 @@ namespace UchProject
         public void Delete(string name)
         {
             Teacher currenTeacher = Program.SearchTeacherByName(name);
-            currenTeacher.SetTeacherName(name);
+            currenTeacher.TeacherName = name;
             comboBoxTeacher.Items.Remove(name);
         }
 
@@ -45,7 +45,7 @@ namespace UchProject
             {
                 if (Program.TeachersArray[i] != null)
                 {
-                    string NowName = Program.TeachersArray[i].Name();
+                    string NowName = Program.TeachersArray[i].TeacherName;
                     bool flag = false;
                     for (int j = 0; j < comboBoxTeacher.Items.Count; j++)
                     {
@@ -77,12 +77,12 @@ namespace UchProject
 
         private void buttonAnalyseCollision_Click(object sender, EventArgs e)
         {
-            string s = "Проверка на пересечения связанные с занятостью преподавателя:";
-            Program.AddResultToArray(s);
             foreach (Teacher currentTeacher in Program.TeachersArray)
             {
                 currentTeacher.CheckByTeacher();
+                Program.TotalCheck();
             }
+
             ResultForm newForm = new ResultForm();
             newForm.Show();
         }

@@ -31,7 +31,7 @@ namespace UchProject
         private void buttonChangeTeacher_Click(object sender, EventArgs e)
         {
             Teacher changeTeacher = Program.SearchTeacherByName(comboBoxAddChangeTeacher.Text);
-            changeTeacher.SetTeacherName(textBoxNewName.Text);
+            changeTeacher.TeacherName = textBoxNewName.Text;
             InsertData form = new InsertData();
             form.Delete(textBoxNewName.Text);
             this.Close();
@@ -44,7 +44,7 @@ namespace UchProject
             {
                 if (Program.TeachersArray[i] != null)
                 {
-                    string NowName = Program.TeachersArray[i].Name();
+                    string NowName = Program.TeachersArray[i].TeacherName;
                     bool flag = false;
                     for (int j = 0; j < comboBoxAddChangeTeacher.Items.Count; j++)
                     {

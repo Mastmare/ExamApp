@@ -8,8 +8,13 @@ namespace UchProject
 {
     class Teacher
     {
-        private string TeacherName;
-        Week TeachersWeek = new Week();
+        private string tchName;
+        Week TchWeek = new Week();
+
+        public Week TeachersWeek
+        {
+            get { return TchWeek; }
+        }
 
         public Teacher(string TeacherName)
         {
@@ -18,23 +23,18 @@ namespace UchProject
 
         public void CheckByTeacher()
         {
-            TeachersWeek.CheckByTeahcer(TeacherName);
-        }
-
-        public string Name()
-        {
-            return TeacherName;
+            Week.WeekTotalCheck();
         }
 
         public void AddRec(string[] insert)
         {
-            TeachersWeek.AddRecordInTable(insert);
+            TchWeek.AddRecordInTable(insert);
         }
 
-        public void SetTeacherName(string newName)
+        public string TeacherName
         {
-            TeacherName = newName;
+            get { return tchName; }
+            set { tchName = value; }
         }
-
     }
 }
