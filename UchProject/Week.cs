@@ -48,59 +48,19 @@ namespace UchProject
             return false;
         }
 
-       /* public void CheckByTeahcer(string teacherName)
+        public static void WeekTotalCheck()
         {
-            bool flag = false;
-            if (WeekTable.Length > 1)
-            {
-                for (int i = 0; i <= WeekTable.Length - 2; i++)
-                {
-                    for (int j = i+1; j <= WeekTable.Length - 1; j++)
-                    {
-                        if (compareTime(ConvertTime(WeekTable[i]["Начало занятия"]),
-                            ConvertTime(WeekTable[i]["Конец занятия"]),
-                            ConvertTime(WeekTable[j]["Начало занятия"]),
-                            ConvertTime(WeekTable[j]["Конец занятия"]))
-                            &&(WeekTable[i]["Тип недели"]==WeekTable[j]["Тип недели"])&&
-                            (WeekTable[i]["День недели"]==WeekTable[j]["День недели"]))
-                        {
-                            flag = true;
-                            StringBuilder resultMessage = new StringBuilder();
-                            resultMessage.AppendFormat("*Есть пересечение во времени у преподавателя {0}:" +
-                                                       Environment.NewLine +
-                                                       "Занятие по {1} {2}-{3}, каб{4}" +
-                                                       Environment.NewLine +
-                                                       "Занятие по {5} {6}-{7}, каб{8}" +
-                                                       Environment.NewLine + "----" +
-                                                       Environment.NewLine, teacherName,
-                                WeekTable[i]["Наименование дисциплины"],
-                                WeekTable[i]["Начало занятия"],
-                                WeekTable[i]["Конец занятия"],
-                                WeekTable[i]["Номер аудитории"],
-                                WeekTable[j]["Наименование дисциплины"],
-                                WeekTable[j]["Начало занятия"],
-                                WeekTable[j]["Конец занятия"],
-                                WeekTable[j]["Номер аудитории"]);
-                            Program.AddResultToArray(Convert.ToString(resultMessage));
-                        }
-                    }
-                }
-            }
-            if (!flag) Program.AddResultToArray("*Пересечений не обнаружено"+
-                Environment.NewLine+ "----" + Environment.NewLine);
-        } */
-
-        public static void WeekTotalCheck(Week firstVarWeek, string currentFirstName)
-        {
+            Week firstVarWeek = Program.TeachersArray[0].TeachersWeek;
+            string currentFirstName = Program.TeachersArray[0].TeacherName;
             int firstIndex=0;
             int secondIndex=0;
             Week secondVarWeek = firstVarWeek;
             string currentSecondName = currentFirstName;
-            NextVarTable(ref secondVarWeek,ref secondIndex,ref currentSecondName);
             while ((currentFirstName!=Program.TeachersArray[Program.TeachersArray.Length-1].TeacherName)
-                && (Program.TeachersArray[Program.TeachersArray.Length-1].TeachersWeek.WeekTable.Length-1
-                <=firstIndex))
+                || (Program.TeachersArray[Program.TeachersArray.Length-1].TeachersWeek.WeekTable.Length-1
+                >firstIndex))
             {
+                NextVarTable(ref secondVarWeek, ref secondIndex, ref currentSecondName);
                 if ((firstVarWeek.WeekTable[firstIndex]["День недели"] ==
                      secondVarWeek.WeekTable[secondIndex]["День недели"])
                     && (firstVarWeek.WeekTable[firstIndex]["Тип недели"] ==
@@ -131,35 +91,79 @@ namespace UchProject
                             Environment.NewLine + "1. Название предмета: {2}, время: {3}-{4}" + 
                             Environment.NewLine + "2. Название предмета: {5}, время: {6}-{7}"+
                             Environment.NewLine, coincidenceType, coincidenceName, 
-                            firstVarWeek.WeekTable[firstIndex]["Название предмета"], 
+                            firstVarWeek.WeekTable[firstIndex]["Наименование дисциплины"], 
                             firstVarWeek.WeekTable[firstIndex]["Начало занятия"],
-                            firstVarWeek.WeekTable[firstIndex]["Конец Занятия"],
-                            secondVarWeek.WeekTable[secondIndex]["Название предмета"],
+                            firstVarWeek.WeekTable[firstIndex]["Конец занятия"],
+                            secondVarWeek.WeekTable[secondIndex]["Наименование дисциплины"],
                             secondVarWeek.WeekTable[secondIndex]["Начало занятия"],
                             secondVarWeek.WeekTable[secondIndex]["Конец занятия"]));
 
-                    }   else if (firstVarWeek.WeekTable[firstIndex]["Номер группы"] ==
-                                 secondVarWeek.WeekTable[secondIndex]["Номер группы"])
+                    }   else if (firstVarWeek.WeekTable[firstIndex]["Номер аудитории"] ==
+                                 secondVarWeek.WeekTable[secondIndex]["Номер аудитории"])
                     {
-                    
+                        Program.AddResultToArray(string.Format(Environment.NewLine + "Обнаружено пересечение:"+
+                            Environment.NewLine + "В аудитории номер {0} одновременно 2 занятия" + 
+                            Environment.NewLine + "1. Название предмета: {1}, время: {2}-{3}" + 
+                            Environment.NewLine + "2. Название предмета: {4}, время: {5}-{6}" +
+                            Environment.NewLine, firstVarWeek.WeekTable[firstIndex]["Номер аудитории"],
+                            firstVarWeek.WeekTable[firstIndex]["Наименование дисциплины"],
+                            firstVarWeek.WeekTable[firstIndex]["Начало занятия"],
+                            firstVarWeek.WeekTable[firstIndex]["Конец занятия"],
+                            secondVarWeek.WeekTable[secondIndex]["Наименование дисциплины"],
+                            secondVarWeek.WeekTable[secondIndex]["Начало занятия"],
+                            secondVarWeek.WeekTable[secondIndex]["Конец занятия"]));
                     }
                 }
+                NextVarTable(ref secondVarWeek, ref secondIndex, ref currentSecondName,
+                    ref firstVarWeek, ref firstIndex, ref currentFirstName);
             }
 
         }
 
         public static void NextVarTable(ref Week checkableTable, ref int currentIndex, ref string name)
         {
-            if (currentIndex+1 < checkableTable.WeekTable.Length + 1)
+            if (currentIndex+1 <= checkableTable.WeekTable.Length - 1)
             {
                 currentIndex++;
             }
-            else if (currentIndex < Program.TeachersArray.Length)
+            else if ((currentIndex == Program.TeachersArray.Length-1)&&
+                (Program.NextTeacherIndexByName(name)!=-1))
             {
-                currentIndex = (Program.NextTeacherIndexByName(name));
-                name = Program.TeachersArray[currentIndex].TeacherName;
-                checkableTable = Program.TeachersArray[currentIndex].TeachersWeek;
+                int newTeacherIndex = (Program.NextTeacherIndexByName(name));
+                name = Program.TeachersArray[newTeacherIndex].TeacherName;
+                checkableTable = Program.TeachersArray[newTeacherIndex].TeachersWeek;
+                currentIndex = 0;
             } 
+        }
+
+        public static void NextVarTable(ref Week secondTable, ref int currentSecondIndex,
+            ref string secondName, ref Week firstTable, ref int currentFirstIndex,
+            ref string firstName)
+        {
+            if (currentSecondIndex == secondTable.WeekTable.Length - 1)
+            {
+                if (currentFirstIndex == firstTable.WeekTable.Length - 1)
+                {
+                    int newTeacherIndex = Program.NextTeacherIndexByName(firstName);
+                    firstName = Program.TeachersArray[newTeacherIndex].TeacherName;
+                    firstTable = Program.TeachersArray[newTeacherIndex].TeachersWeek;
+                    currentFirstIndex = 0;
+                    if (currentFirstIndex + 1 <= firstTable.WeekTable.Length - 1)
+                    {
+                        secondTable = firstTable;
+                        secondName = firstName;
+                        currentSecondIndex = currentFirstIndex + 1;
+                    }
+                    else if (Program.NextTeacherIndexByName(firstName) != -1)
+                    {
+                        newTeacherIndex = Program.NextTeacherIndexByName(firstName);
+                        secondName = Program.TeachersArray[newTeacherIndex].TeacherName;
+                        secondTable = Program.TeachersArray[newTeacherIndex].TeachersWeek;
+                        currentSecondIndex = 0;
+                    }
+                }
+                else currentFirstIndex++;
+            }
         }
     }
 }

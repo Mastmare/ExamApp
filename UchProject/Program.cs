@@ -42,12 +42,12 @@ namespace UchProject
         {
             for (int i = 0; i < TeachersArray.Length; i++)
             {
-                if (TeachersArray[i].TeacherName == currentName && i + 1 < TeachersArray.Length)
+                if (TeachersArray[i].TeacherName == currentName && i + 1 < TeachersArray.Length-1)
                 {
                     return i + 1;
                 }
             }
-            return TeachersArray.Length;
+            return -1;
         }
 
         public static void AddResultToArray(string s)
@@ -59,14 +59,6 @@ namespace UchProject
         public static string[] GetDataString()
         {
             return ResultArray;
-        }
-
-        public static void TotalCheck()
-        {
-            foreach (Teacher firstTeacher in TeachersArray )
-            {
-                
-            }
         }
     }
 }

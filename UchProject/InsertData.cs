@@ -77,12 +77,7 @@ namespace UchProject
 
         private void buttonAnalyseCollision_Click(object sender, EventArgs e)
         {
-            foreach (Teacher currentTeacher in Program.TeachersArray)
-            {
-                currentTeacher.CheckByTeacher();
-                Program.TotalCheck();
-            }
-
+            Week.WeekTotalCheck();
             ResultForm newForm = new ResultForm();
             newForm.Show();
         }

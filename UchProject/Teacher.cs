@@ -21,11 +21,6 @@ namespace UchProject
             this.TeacherName = TeacherName;
         }
 
-        public void CheckByTeacher()
-        {
-            Week.WeekTotalCheck();
-        }
-
         public void AddRec(string[] insert)
         {
             TchWeek.AddRecordInTable(insert);
