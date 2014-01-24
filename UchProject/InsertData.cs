@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-
+using System.Configuration;
 namespace UchProject
 {
     public partial class InsertData : Form
@@ -34,9 +34,66 @@ namespace UchProject
             
         }
 
+        private void FileDataReloaderAdd(ref string[] textData, string comboBoxText)
+        {
+
+            bool flag = false;
+            foreach (var currNumber in textData)
+            {
+                if (currNumber == comboBoxText)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag)
+            {
+                Array.Resize(ref textData, textData.Length+1);
+                textData[textData.Length - 1] = comboBoxText;
+            }
+        }
+
+        private void FileDataReloaderDelete(ref string[] textData, string comboBoxText)
+        {
+            bool flag = false;
+            int deleteStringNumber=0;
+            foreach (var currNumber in textData)
+            {
+                if (currNumber == comboBoxText)
+                {
+                    flag = true;
+                    deleteStringNumber = Array.IndexOf(textData, currNumber);
+                    break;
+                } 
+            }
+            if (flag)
+            {
+                textData[deleteStringNumber] = null;
+                int incrementIndex = 0;
+                string[] newTextData = new string[textData.Length-1];
+                for (int i = 0; i < textData.Length; i++)
+                {
+                    if (!string.IsNullOrWhiteSpace(textData[i]))
+                    {
+                        newTextData[incrementIndex++] = textData[i];
+                    }
+                }
+                textData = newTextData;
+            }
+        }
+
         private void InsertData_Load(object sender, EventArgs e)
         {
             comboBoxTeacher.Items.Clear();
+            comboBoxGroup.Items.Clear();
+            comboBoxAuditory.Items.Clear();
+            comboBoxDiscipline.Items.Clear();
+            string[] auditoryText = System.IO.File.ReadAllLines("../../AuditoryFieldData.txt");
+            comboBoxAuditory.Items.AddRange(auditoryText);
+            string[] groupText = System.IO.File.ReadAllLines("../../GroupFieldData.txt");
+            comboBoxGroup.Items.AddRange(groupText);
+            string[] disciplineText = System.IO.File.ReadAllLines("../../DisciplineFieldData.txt");
+            comboBoxDiscipline.Items.AddRange(disciplineText);
         }
 
         private void comboBoxTeacher_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,38 +163,92 @@ namespace UchProject
 
         private void buttonAddNewGroup_Click(object sender, EventArgs e)
         {
-            comboBoxGroup.Items.Add(comboBoxGroup.Text);
-            comboBoxGroup.ResetText();
+            if (!string.IsNullOrWhiteSpace(comboBoxGroup.Text))
+            {
+                string[] textData = System.IO.File.ReadAllLines("../../GroupFieldData.txt");
+                string BoxText = comboBoxGroup.Text;
+                FileDataReloaderAdd(ref textData, BoxText);
+                System.IO.File.WriteAllLines("../../GroupFieldData.txt", textData);
+                comboBoxGroup.Items.Clear();
+                comboBoxGroup.Items.AddRange(textData);
+                comboBoxGroup.ResetText();
+            }
+            else MessageBox.Show("Заполните поле");
         }
 
         private void buttonAddDiscipline_Click(object sender, EventArgs e)
         {
-            comboBoxDiscipline.Items.Add(comboBoxDiscipline.Text);
-            comboBoxDiscipline.ResetText();
+            if (!string.IsNullOrWhiteSpace(comboBoxDiscipline.Text))
+            {
+                string[] textData = System.IO.File.ReadAllLines("../../DisciplineFieldData.txt");
+                string BoxText = comboBoxDiscipline.Text;
+                FileDataReloaderAdd(ref textData, BoxText);
+                System.IO.File.WriteAllLines("../../DisciplineFieldData.txt", textData);
+                comboBoxDiscipline.Items.Clear();
+                comboBoxDiscipline.Items.AddRange(textData);
+                comboBoxDiscipline.ResetText();
+            }
+            else MessageBox.Show("Заполните поле");
         }
 
         private void buttonAddNumAuditory_Click(object sender, EventArgs e)
         {
-            comboBoxAuditory.Items.Add(comboBoxAuditory.Text);
-            comboBoxAuditory.ResetText();
+            if (!string.IsNullOrWhiteSpace(comboBoxAuditory.Text))
+            {
+                string[] textData = System.IO.File.ReadAllLines("../../AuditoryFieldData.txt");
+                string BoxText = comboBoxAuditory.Text;
+                FileDataReloaderAdd(ref textData, BoxText);
+                System.IO.File.WriteAllLines("../../AuditoryFieldData.txt", textData);
+                comboBoxAuditory.Items.Clear();
+                comboBoxAuditory.Items.AddRange(textData);
+                comboBoxAuditory.ResetText();
+            }
+            else MessageBox.Show("Заполните поле");
         }
 
         private void buttonDeleteGroup_Click(object sender, EventArgs e)
         {
-            comboBoxGroup.Items.Remove(comboBoxGroup.Text);
-            comboBoxGroup.ResetText();
+            if (!string.IsNullOrWhiteSpace(comboBoxGroup.Text))
+            {
+                string[] textData = System.IO.File.ReadAllLines("../../GroupFieldData.txt");
+                string BoxText = comboBoxGroup.Text;
+                FileDataReloaderDelete(ref textData, BoxText);
+                System.IO.File.WriteAllLines("../../GroupFieldData.txt", textData);
+                comboBoxGroup.Items.Clear();
+                comboBoxGroup.Items.AddRange(textData);
+                comboBoxGroup.ResetText();
+            }
+            else MessageBox.Show("Заполните поле");
         }
 
         private void buttonDeleteDiscipline_Click(object sender, EventArgs e)
         {
-            comboBoxDiscipline.Items.Remove(comboBoxDiscipline.Text);
-            comboBoxDiscipline.ResetText();
+            if (!string.IsNullOrWhiteSpace(comboBoxDiscipline.Text))
+            {
+                string[] textData = System.IO.File.ReadAllLines("../../DisciplineFieldData.txt");
+                string BoxText = comboBoxDiscipline.Text;
+                FileDataReloaderDelete(ref textData, BoxText);
+                System.IO.File.WriteAllLines("../../DisciplineFieldData.txt", textData);
+                comboBoxDiscipline.Items.Clear();
+                comboBoxDiscipline.Items.AddRange(textData);
+                comboBoxDiscipline.ResetText();
+            }
+            else MessageBox.Show("Заполните поле");
         }
 
         private void buttonDeleteNumAuditory_Click(object sender, EventArgs e)
         {
-            comboBoxAuditory.Items.Remove(comboBoxAuditory.Text);
-            comboBoxAuditory.ResetText();
+            if (!string.IsNullOrWhiteSpace(comboBoxAuditory.Text))
+            {
+                string[] textData = System.IO.File.ReadAllLines("../../AuditoryFieldData.txt");
+                string BoxText = comboBoxAuditory.Text;
+                FileDataReloaderDelete(ref textData, BoxText);
+                System.IO.File.WriteAllLines("../../AuditoryFieldData.txt", textData);
+                comboBoxAuditory.Items.Clear();
+                comboBoxAuditory.Items.AddRange(textData);
+                comboBoxAuditory.ResetText();
+            }
+            else MessageBox.Show("Заполните поле");
         }
 
     }
