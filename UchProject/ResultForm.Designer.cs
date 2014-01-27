@@ -37,14 +37,14 @@
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxResult.Size = new System.Drawing.Size(408, 249);
+            this.textBoxResult.Size = new System.Drawing.Size(774, 249);
             this.textBoxResult.TabIndex = 0;
             // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 273);
+            this.ClientSize = new System.Drawing.Size(799, 273);
             this.Controls.Add(this.textBoxResult);
             this.Name = "ResultForm";
             this.Text = "ResultForm";

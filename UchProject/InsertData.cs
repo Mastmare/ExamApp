@@ -158,7 +158,9 @@ namespace UchProject
         {
             Week.WeekTotalCheck();
             ResultForm newForm = new ResultForm();
+            newForm.ClearText();
             newForm.Show();
+            Program.ClearResult();
         }
 
         private void buttonAddNewGroup_Click(object sender, EventArgs e)
@@ -249,6 +251,11 @@ namespace UchProject
                 comboBoxAuditory.ResetText();
             }
             else MessageBox.Show("Заполните поле");
+        }
+
+        private void comboBoxTimeAndTypeOfLesson_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

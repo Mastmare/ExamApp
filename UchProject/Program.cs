@@ -29,6 +29,11 @@ namespace UchProject
             TeachersArray[TeachersArray.Length-1] = new Teacher(NewTeacherName);
         }
 
+        public static void ClearResult()
+        {
+            ResultArray = new string[0];
+        }
+
         public static Teacher SearchTeacherByName(string searchebleName)
         {
             foreach (Teacher nowTeacher in TeachersArray)
@@ -42,7 +47,7 @@ namespace UchProject
         {
             for (int i = 0; i < TeachersArray.Length; i++)
             {
-                if (TeachersArray[i].TeacherName == currentName && i + 1 < TeachersArray.Length-1)
+                if (TeachersArray[i].TeacherName == currentName && i + 1 <= TeachersArray.Length-1)
                 {
                     return i + 1;
                 }

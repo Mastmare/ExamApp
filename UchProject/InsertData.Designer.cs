@@ -57,12 +57,21 @@
             // 
             this.comboBoxTimeAndTypeOfLesson.FormattingEnabled = true;
             this.comboBoxTimeAndTypeOfLesson.Items.AddRange(new object[] {
-            "ПР:9.00-10.30",
-            "ПР:10.45-12.15"});
+            "ЛЗ: 8.30-11.40",
+            "ЛЗ:11.50-15.00",
+            "ЛЗ:15.10-18.20",
+            "ЛЗ:18.00-21.10",
+            "ЛЗ:18.30-21.40",
+            "ПР: 9.00-10.30",
+            "ПР:10.45-12.15",
+            "ПР:13.00-14.30",
+            "ПР:14.45-16.15",
+            "ПР:16.30-18.00"});
             this.comboBoxTimeAndTypeOfLesson.Location = new System.Drawing.Point(247, 7);
             this.comboBoxTimeAndTypeOfLesson.Name = "comboBoxTimeAndTypeOfLesson";
             this.comboBoxTimeAndTypeOfLesson.Size = new System.Drawing.Size(189, 21);
             this.comboBoxTimeAndTypeOfLesson.TabIndex = 0;
+            this.comboBoxTimeAndTypeOfLesson.SelectedIndexChanged += new System.EventHandler(this.comboBoxTimeAndTypeOfLesson_SelectedIndexChanged);
             // 
             // labelTypeAndTimeOfLesson
             // 
